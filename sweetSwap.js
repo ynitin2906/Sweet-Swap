@@ -1,11 +1,22 @@
-var candies = ["Blue", "Orange", "Green", "Yellow", "Red", "Purple"];
-var board = [];
-var rows = 9;
-var columns = 9;
-var score = 0;
+let candies = ["Blue", "Orange", "Green", "Yellow", "Red", "Purple"];
+let board = [];
+let rows = 9;
+let columns = 9;
+let score = 0;
+let currTile;
+let otherTile;
 
-var currTile;
-var otherTile;
+// let bgIndex = 1;
+// function increaseScore() {
+//   score++;
+//   if (score % 200 === 0) {
+//     bgIndex++;
+//     if (bgIndex > 3) {
+//       bgIndex = 1;
+//     }
+//     document.body.style.backgroundImage = `url('background${bgIndex}.jpg')`;
+//   }
+// }
 
 window.onload = function () {
   startGame();
@@ -16,6 +27,10 @@ window.onload = function () {
     slideCandy();
     generateCandy();
   }, 100);
+
+  window.setTimeout(() => {
+    score = 0;
+  }, 800);
 };
 
 function randomCandy() {
@@ -128,6 +143,9 @@ function crushThree() {
         candy2.src = "./images/blank.png";
         candy3.src = "./images/blank.png";
         score += 30;
+
+        let sound = new Audio("./crush.mp3");
+        sound.play();
       }
     }
   }
@@ -147,6 +165,8 @@ function crushThree() {
         candy2.src = "./images/blank.png";
         candy3.src = "./images/blank.png";
         score += 30;
+        let sound = new Audio("./crush.mp3");
+        sound.play();
       }
     }
   }
