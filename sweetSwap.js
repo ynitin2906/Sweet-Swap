@@ -6,22 +6,9 @@ let score = 0;
 let currTile;
 let otherTile;
 
-// let bgIndex = 1;
-// function increaseScore() {
-//   score++;
-//   if (score % 200 === 0) {
-//     bgIndex++;
-//     if (bgIndex > 3) {
-//       bgIndex = 1;
-//     }
-//     document.body.style.backgroundImage = `url('background${bgIndex}.jpg')`;
-//   }
-// }
-
 window.onload = function () {
   startGame();
 
-  //1/10th of a second
   window.setInterval(function () {
     crushCandy();
     slideCandy();
@@ -34,7 +21,7 @@ window.onload = function () {
 };
 
 function randomCandy() {
-  return candies[Math.floor(Math.random() * candies.length)]; //0 - 5.99
+  return candies[Math.floor(Math.random() * candies.length)];
 }
 
 function startGame() {
@@ -46,13 +33,12 @@ function startGame() {
       tile.id = r.toString() + "-" + c.toString();
       tile.src = "./images/" + randomCandy() + ".png";
 
-      //DRAG FUNCTIONALITY
-      tile.addEventListener("dragstart", dragStart); //click on a candy, initialize drag process
-      tile.addEventListener("dragover", dragOver); //clicking on candy, moving mouse to drag the candy
-      tile.addEventListener("dragenter", dragEnter); //dragging candy onto another candy
-      tile.addEventListener("dragleave", dragLeave); //leave candy over another candy
-      tile.addEventListener("drop", dragDrop); //dropping a candy over another candy
-      tile.addEventListener("dragend", dragEnd); //after drag process completed, we swap candies
+      tile.addEventListener("dragstart", dragStart);
+      tile.addEventListener("dragover", dragOver);
+      tile.addEventListener("dragenter", dragEnter);
+      tile.addEventListener("dragleave", dragLeave);
+      tile.addEventListener("drop", dragDrop);
+      tile.addEventListener("dragend", dragEnd);
 
       document.getElementById("board").append(tile);
       row.push(tile);
@@ -64,7 +50,6 @@ function startGame() {
 }
 
 function dragStart() {
-  //this refers to tile that was clicked on for dragging
   currTile = this;
 }
 
@@ -79,7 +64,6 @@ function dragEnter(e) {
 function dragLeave() {}
 
 function dragDrop() {
-  //this refers to the target tile that was dropped on
   otherTile = this;
 }
 
@@ -121,8 +105,6 @@ function dragEnd() {
 }
 
 function crushCandy() {
-  //crushFive();
-  //crushFour();
   crushThree();
   document.getElementById("score").innerText = score;
 }
@@ -142,7 +124,7 @@ function crushThree() {
         candy1.src = "./images/blank.png";
         candy2.src = "./images/blank.png";
         candy3.src = "./images/blank.png";
-        score += 30;
+        score += 20;
 
         let sound = new Audio("./crush.mp3");
         sound.play();
@@ -164,7 +146,7 @@ function crushThree() {
         candy1.src = "./images/blank.png";
         candy2.src = "./images/blank.png";
         candy3.src = "./images/blank.png";
-        score += 30;
+        score += 20;
         let sound = new Audio("./crush.mp3");
         sound.play();
       }
@@ -173,7 +155,6 @@ function crushThree() {
 }
 
 function checkValid() {
-  //check rows
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns - 2; c++) {
       let candy1 = board[r][c];
@@ -189,7 +170,6 @@ function checkValid() {
     }
   }
 
-  //check columns
   for (let c = 0; c < columns; c++) {
     for (let r = 0; r < rows - 2; r++) {
       let candy1 = board[r][c];
